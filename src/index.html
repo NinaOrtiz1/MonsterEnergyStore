@@ -3,274 +3,1235 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MONSTER ENERGY STORE</title>
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="Explora la colección Monster Energy en MonsterEnergyStore, un proyecto académico de tienda promocional.">
+  <title>MonsterEnergyStore | Unleash the Beast</title>
   <style>
     :root {
       color-scheme: dark;
-      --background: #101210;
-      --surface: #1b1f1b;
-      --surface-light: #252a25;
-      --neon: #a4ff00;
-      --text: #f4f6f2;
-      --muted: #b7beb5;
+      --black: #050505;
+      --black-soft: #101010;
+      --panel: #151715;
+      --panel-raised: #1c201b;
+      --green: #95d600;
+      --green-bright: #b6ff00;
+      --white: #fff;
+      --gray: #a1a1a1;
+      --line: rgb(255 255 255 / 10%);
+      --green-line: rgb(149 214 0 / 28%);
+      --page-width: 1180px;
+      --ease-out: cubic-bezier(0.2, 0.75, 0.25, 1);
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
     html {
+      background: var(--black);
       scroll-behavior: smooth;
+      scroll-padding-top: 90px;
     }
 
     body {
+      background:
+        radial-gradient(ellipse at 50% 20%, rgb(39 52 24 / 14%), transparent 48%),
+        var(--black);
+      color: var(--white);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
       margin: 0;
-      background: var(--background);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      min-width: 320px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
     }
 
     a {
       color: inherit;
     }
 
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--green-bright);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      background: var(--green-bright);
+      color: var(--black);
+      font-weight: 800;
+      left: 1rem;
+      padding: 0.7rem 1rem;
+      position: fixed;
+      top: 1rem;
+      transform: translateY(-160%);
+      z-index: 20;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .container {
+      margin-inline: auto;
+      max-width: var(--page-width);
+      padding-inline: 1.5rem;
+      width: 100%;
+    }
+
     .site-header {
+      -webkit-backdrop-filter: blur(18px);
       align-items: center;
-      background: #101210;
-      border-bottom: 1px solid #343a32;
+      backdrop-filter: blur(18px);
+      background: rgb(5 5 5 / 88%);
+      border-bottom: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
-      padding: 1rem clamp(1.25rem, 6vw, 5rem);
+      min-height: 76px;
+      padding: 0 clamp(1.25rem, 5vw, 4rem);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
     .brand {
-      color: var(--text);
-      font-size: 1rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      line-height: 1.1;
+      align-items: center;
+      display: inline-flex;
+      gap: 0.7rem;
       text-decoration: none;
     }
 
-    .brand span {
-      color: var(--neon);
+    .brand-mark {
+      align-items: center;
+      background: var(--green);
+      border-radius: 3px;
+      color: var(--black);
+      display: inline-flex;
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 1000;
+      height: 38px;
+      justify-content: center;
+      line-height: 1;
+      transform: skew(-8deg);
+      width: 34px;
+    }
+
+    .brand-name {
       display: block;
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      margin-top: 0.35rem;
+      font-size: 0.9rem;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      line-height: 1.1;
+    }
+
+    .brand-name span {
+      color: var(--green-bright);
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      margin-top: 0.3rem;
     }
 
     .site-nav {
+      align-items: center;
       display: flex;
-      gap: 1.75rem;
+      gap: 0.35rem;
     }
 
     .site-nav a {
-      color: var(--muted);
-      font-size: 0.9rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: #d3d3d3;
+      font-size: 0.84rem;
       font-weight: 700;
+      padding: 0.55rem 0.9rem;
       text-decoration: none;
-      transition: color 180ms ease;
+      transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
     }
 
     .site-nav a:hover,
     .site-nav a:focus-visible {
-      color: var(--neon);
+      background: rgb(149 214 0 / 9%);
+      border-color: var(--green-line);
+      color: var(--green-bright);
+    }
+
+    .menu-toggle {
+      align-items: center;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--white);
+      cursor: pointer;
+      display: none;
+      height: 42px;
+      justify-content: center;
+      padding: 0;
+      width: 44px;
+    }
+
+    .menu-icon,
+    .menu-icon::before,
+    .menu-icon::after {
+      background: var(--green-bright);
+      border-radius: 2px;
+      content: "";
+      display: block;
+      height: 2px;
+      position: relative;
+      transition: transform 180ms ease, top 180ms ease, background 180ms ease;
+      width: 19px;
+    }
+
+    .menu-icon::before {
+      position: absolute;
+      top: -6px;
+    }
+
+    .menu-icon::after {
+      position: absolute;
+      top: 6px;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-icon {
+      background: transparent;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-icon::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-icon::after {
+      top: 0;
+      transform: rotate(-45deg);
     }
 
     .hero {
-      align-items: center;
       background:
-        radial-gradient(ellipse at 80% 45%, rgb(101 153 0 / 19%), transparent 42%),
-        linear-gradient(125deg, #171b17, #101210 70%);
-      display: flex;
-      min-height: 470px;
-      padding: 5rem clamp(1.25rem, 10vw, 9rem);
+        radial-gradient(ellipse at 76% 45%, rgb(149 214 0 / 20%), transparent 34%),
+        radial-gradient(ellipse at 12% 100%, rgb(149 214 0 / 8%), transparent 35%),
+        linear-gradient(115deg, #0d100c, var(--black) 70%);
+      overflow: hidden;
+      padding-block: 2rem;
+      position: relative;
     }
 
-    .hero-content {
-      max-width: 720px;
+    .hero-layout {
+      align-items: center;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      min-height: min(690px, calc(100svh - 76px));
+      position: relative;
+    }
+
+    .hero::before {
+      border: 1px solid rgb(182 255 0 / 18%);
+      border-radius: 50%;
+      box-shadow: 0 0 70px rgb(149 214 0 / 14%), inset 0 0 65px rgb(149 214 0 / 8%);
+      content: "";
+      height: min(48vw, 580px);
+      pointer-events: none;
+      position: absolute;
+      right: -5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(48vw, 580px);
+    }
+
+    .hero-copy {
+      animation: rise-in 750ms var(--ease-out) both;
+      max-width: 620px;
+      position: relative;
+      z-index: 1;
     }
 
     .eyebrow {
-      color: var(--neon);
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.24em;
+      align-items: center;
+      color: var(--green-bright);
+      display: inline-flex;
+      font-size: 0.72rem;
+      font-weight: 850;
+      gap: 0.65rem;
+      letter-spacing: 0.2em;
+      margin: 0 0 1.15rem;
       text-transform: uppercase;
     }
 
+    .eyebrow::before {
+      background: var(--green);
+      box-shadow: 0 0 12px rgb(182 255 0 / 70%);
+      content: "";
+      height: 2px;
+      width: 28px;
+    }
+
     .hero h1 {
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      letter-spacing: -0.06em;
-      line-height: 0.98;
-      margin: 0.75rem 0 1.25rem;
-      max-width: 700px;
+      font-size: clamp(3.5rem, 8.5vw, 7.3rem);
+      font-weight: 950;
+      letter-spacing: -0.075em;
+      line-height: 0.88;
+      margin: 0 0 1.5rem;
       text-transform: uppercase;
     }
 
     .hero h1 span {
-      color: var(--neon);
+      color: var(--green-bright);
       display: block;
+      text-shadow: 0 0 36px rgb(149 214 0 / 38%);
     }
 
-    .hero p {
-      color: var(--muted);
-      font-size: 1.1rem;
-      margin: 0 0 1.8rem;
-      max-width: 620px;
+    .hero-description {
+      color: #c2c2c2;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      margin: 0;
+      max-width: 490px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 2rem;
     }
 
     .button {
-      background: var(--neon);
-      border: 2px solid var(--neon);
-      border-radius: 3px;
-      color: #101210;
-      display: inline-block;
-      font-size: 0.85rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      padding: 0.85rem 1.25rem;
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 0.76rem;
+      font-weight: 850;
+      gap: 0.65rem;
+      justify-content: center;
+      letter-spacing: 0.09em;
+      min-height: 48px;
+      padding: 0.8rem 1.2rem;
       text-decoration: none;
-      transition: background-color 180ms ease, color 180ms ease;
+      transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, color 200ms ease, transform 200ms ease;
     }
 
-    .button:hover,
-    .button:focus-visible {
-      background: transparent;
-      color: var(--neon);
+    .button-primary {
+      background: var(--green-bright);
+      box-shadow: 0 0 24px rgb(149 214 0 / 24%);
+      color: #101209;
     }
 
-    .content-section {
-      padding: 5rem clamp(1.25rem, 8vw, 7rem);
-      scroll-margin-top: 2rem;
+    .button-primary:hover {
+      background: var(--green);
+      box-shadow: 0 0 30px rgb(182 255 0 / 40%);
+      transform: translateY(-3px);
     }
 
-    .content-section h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -0.04em;
-      line-height: 1.1;
+    .button-secondary {
+      background: rgb(255 255 255 / 3%);
+      border-color: rgb(255 255 255 / 22%);
+      color: var(--white);
+    }
+
+    .button-secondary:hover {
+      background: rgb(149 214 0 / 8%);
+      border-color: var(--green);
+      color: var(--green-bright);
+      transform: translateY(-3px);
+    }
+
+    .button-arrow {
+      font-size: 1rem;
+      line-height: 1;
+      transition: transform 180ms ease;
+    }
+
+    .button:hover .button-arrow {
+      transform: translateX(3px);
+    }
+
+    .hero-visual {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      min-height: 440px;
+      position: relative;
+    }
+
+    .hero-glow {
+      background: var(--green);
+      border-radius: 50%;
+      filter: blur(90px);
+      height: 45%;
+      opacity: 0.18;
+      position: absolute;
+      width: 45%;
+    }
+
+    .hero-can {
+      animation: can-float 5s ease-in-out infinite;
+      background: #f3f4f0;
+      border: 1px solid rgb(255 255 255 / 24%);
+      border-radius: 20px;
+      box-shadow: 0 30px 90px rgb(0 0 0 / 65%), 0 0 55px rgb(149 214 0 / 13%);
+      height: min(440px, 42vw);
+      max-width: 390px;
+      object-fit: contain;
+      padding: 1rem;
+      position: relative;
+      transform: rotate(5deg);
+      width: 72%;
+      z-index: 1;
+    }
+
+    .hero-stamp {
+      background: var(--green-bright);
+      border: 5px solid var(--black);
+      border-radius: 50%;
+      bottom: 4.5rem;
+      box-shadow: 0 0 28px rgb(182 255 0 / 35%);
+      color: var(--black);
+      display: grid;
+      font-size: 0.62rem;
+      font-weight: 950;
+      height: 92px;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      place-content: center;
+      position: absolute;
+      right: 4%;
+      text-align: center;
+      transform: rotate(10deg);
+      width: 92px;
+      z-index: 2;
+    }
+
+    .section {
+      padding-block: clamp(4.5rem, 8vw, 7rem);
+      scroll-margin-top: 76px;
+    }
+
+    .section-heading {
+      align-items: end;
+      display: flex;
+      gap: 2rem;
+      justify-content: space-between;
+      margin-bottom: 2.2rem;
+    }
+
+    .section-heading-copy {
+      max-width: 660px;
+    }
+
+    .section-kicker {
+      color: var(--green);
+      font-size: 0.68rem;
+      font-weight: 850;
+      letter-spacing: 0.22em;
       margin: 0 0 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(2.15rem, 4.5vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: -0.055em;
+      line-height: 1;
+      margin: 0;
     }
 
     .section-intro {
-      color: var(--muted);
-      margin: 0 0 2rem;
-      max-width: 660px;
+      color: var(--gray);
+      margin: 0.8rem 0 0;
+      max-width: 600px;
+    }
+
+    .text-link {
+      align-items: center;
+      color: var(--green-bright);
+      display: inline-flex;
+      flex-shrink: 0;
+      font-size: 0.78rem;
+      font-weight: 800;
+      gap: 0.55rem;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+
+    .text-link::after {
+      content: "↗";
+      font-size: 1rem;
+      transition: transform 180ms ease;
+    }
+
+    .text-link:hover::after {
+      transform: translate(3px, -3px);
+    }
+
+    .products-section {
+      background: linear-gradient(180deg, var(--black), #0a0c09 50%, var(--black));
     }
 
     .product-grid {
       display: grid;
-      gap: 1.25rem;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .product-card {
+      animation: rise-in 650ms var(--ease-out) backwards;
+      background: linear-gradient(145deg, #171a16, #0f110f 80%);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      transition: border-color 240ms ease, box-shadow 240ms ease, transform 240ms var(--ease-out);
+    }
+
+    .product-card:nth-child(2),
+    .product-card:nth-child(5) {
+      animation-delay: 80ms;
+    }
+
+    .product-card:nth-child(3),
+    .product-card:nth-child(6) {
+      animation-delay: 160ms;
+    }
+
+    .product-card:hover {
+      border-color: rgb(182 255 0 / 58%);
+      box-shadow: 0 20px 50px rgb(0 0 0 / 44%), 0 0 25px rgb(149 214 0 / 12%);
+      transform: translateY(-7px);
+    }
+
+    .product-image-wrap {
+      align-items: center;
+      background:
+        radial-gradient(ellipse at 50% 55%, rgb(149 214 0 / 12%), transparent 48%),
+        #0d100d;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      height: 265px;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .product-image-wrap::after {
+      border: 1px solid rgb(255 255 255 / 5%);
+      border-radius: 50%;
+      content: "";
+      height: 220px;
+      position: absolute;
+      width: 220px;
+    }
+
+    .product-image {
+      background: #f2f3ef;
+      border-radius: 8px;
+      height: 100%;
+      object-fit: contain;
+      position: relative;
+      transition: transform 350ms var(--ease-out);
+      width: 100%;
+      z-index: 1;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.04);
+    }
+
+    .product-copy {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 1.25rem;
+    }
+
+    .product-category {
+      color: var(--green);
+      font-size: 0.63rem;
+      font-weight: 850;
+      letter-spacing: 0.18em;
+      margin: 0 0 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .product-card h3 {
+      font-size: 1.2rem;
+      font-weight: 850;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .product-description {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin: 0.65rem 0 1.3rem;
+    }
+
+    .product-link {
+      align-items: center;
+      border-top: 1px solid var(--line);
+      color: var(--white);
+      display: flex;
+      font-size: 0.7rem;
+      font-weight: 850;
+      justify-content: space-between;
+      letter-spacing: 0.1em;
+      margin-top: auto;
+      padding-top: 1rem;
+      text-decoration: none;
+      transition: color 180ms ease;
+    }
+
+    .product-link::after {
+      color: var(--green-bright);
+      content: "↗";
+      font-size: 1.05rem;
+      transition: transform 180ms ease;
+    }
+
+    .product-link:hover {
+      color: var(--green-bright);
+    }
+
+    .product-link:hover::after {
+      transform: translate(3px, -3px);
+    }
+
+    .attitude-section {
+      background:
+        radial-gradient(ellipse at 20% 45%, rgb(149 214 0 / 12%), transparent 42%),
+        #0c0e0c;
+      border-block: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .attitude-grid {
+      align-items: center;
+      display: grid;
+      gap: clamp(2rem, 7vw, 6rem);
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+
+    .attitude-copy blockquote {
+      font-size: clamp(2.4rem, 5.2vw, 5rem);
+      font-weight: 950;
+      letter-spacing: -0.065em;
+      line-height: 0.98;
+      margin: 0;
+      max-width: 570px;
+      text-transform: uppercase;
+    }
+
+    .attitude-copy blockquote span {
+      color: var(--green-bright);
+      display: block;
+      text-shadow: 0 0 34px rgb(149 214 0 / 28%);
+    }
+
+    .attitude-copy p {
+      color: var(--gray);
+      margin: 1.4rem 0 0;
+      max-width: 390px;
+    }
+
+    .attitude-collage {
+      align-items: center;
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      min-height: 380px;
+      position: relative;
+    }
+
+    .collage-photo {
+      background: #f2f3ef;
+      border: 1px solid rgb(255 255 255 / 16%);
+      border-radius: 10px;
+      box-shadow: 0 18px 45px rgb(0 0 0 / 40%);
+      height: 100%;
+      object-fit: contain;
+      padding: 0.7rem;
+      transition: transform 300ms var(--ease-out);
+      width: 100%;
+    }
+
+    .collage-photo:first-child {
+      grid-row: 1 / 3;
+      height: 310px;
+      transform: rotate(-4deg);
+    }
+
+    .collage-photo:nth-child(2) {
+      height: 190px;
+      transform: rotate(4deg) translateY(8px);
+    }
+
+    .collage-photo:nth-child(3) {
+      height: 190px;
+      transform: rotate(-2deg) translateY(-8px);
+    }
+
+    .attitude-collage:hover .collage-photo:first-child {
+      transform: rotate(-1deg) scale(1.02);
+    }
+
+    .attitude-collage:hover .collage-photo:nth-child(2) {
+      transform: rotate(1deg) translateY(8px);
+    }
+
+    .attitude-collage:hover .collage-photo:nth-child(3) {
+      transform: rotate(0) translateY(-8px);
+    }
+
+    .benefits-section {
+      background: var(--black);
+    }
+
+    .benefit-grid {
+      display: grid;
+      gap: 1rem;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       margin-top: 2rem;
     }
 
-    .product-card {
-      background: var(--surface);
-      border: 1px solid #343a32;
-      border-radius: 6px;
-      overflow: hidden;
-      transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+    .benefit-card {
+      background: linear-gradient(145deg, #171a16, #0e100e);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      min-height: 205px;
+      padding: 1.5rem;
+      transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
     }
 
-    .product-card:hover {
-      border-color: var(--neon);
-      box-shadow: 0 12px 32px rgb(0 0 0 / 30%);
-      transform: translateY(-6px);
+    .benefit-card:hover {
+      border-color: var(--green-line);
+      box-shadow: 0 16px 40px rgb(0 0 0 / 35%), 0 0 24px rgb(149 214 0 / 9%);
+      transform: translateY(-5px);
     }
 
-    .product-card img {
-      display: block;
-      height: 220px;
-      object-fit: cover;
+    .benefit-icon {
+      align-items: center;
+      background: rgb(149 214 0 / 10%);
+      border: 1px solid var(--green-line);
+      border-radius: 9px;
+      color: var(--green-bright);
+      display: inline-flex;
+      height: 46px;
+      justify-content: center;
+      width: 46px;
+    }
+
+    .benefit-icon svg {
+      height: 23px;
+      width: 23px;
+    }
+
+    .benefit-card h3 {
+      font-size: 1.05rem;
+      margin: 1.1rem 0 0.4rem;
+    }
+
+    .benefit-card p {
+      color: var(--gray);
+      font-size: 0.87rem;
+      margin: 0;
+    }
+
+    .about-section {
+      background:
+        linear-gradient(105deg, rgb(149 214 0 / 7%), transparent 55%),
+        var(--black-soft);
+      border-block: 1px solid var(--line);
+    }
+
+    .about-layout {
+      align-items: center;
+      display: grid;
+      gap: clamp(2rem, 8vw, 8rem);
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .about-mark {
+      align-items: center;
+      aspect-ratio: 1;
+      background:
+        radial-gradient(circle, rgb(149 214 0 / 15%), transparent 65%),
+        #0a0c0a;
+      border: 1px solid var(--green-line);
+      border-radius: 50%;
+      box-shadow: 0 0 65px rgb(149 214 0 / 10%), inset 0 0 50px rgb(149 214 0 / 7%);
+      display: flex;
+      justify-content: center;
+      margin-inline: auto;
+      max-width: 330px;
+      position: relative;
       width: 100%;
     }
 
-    .product-copy {
-      padding: 1.25rem;
+    .about-mark::before,
+    .about-mark::after {
+      border: 1px solid rgb(149 214 0 / 22%);
+      border-radius: 50%;
+      content: "";
+      inset: 14px;
+      position: absolute;
     }
 
-    .product-copy h3 {
-      color: var(--neon);
-      font-size: 1.25rem;
-      margin: 0 0 0.5rem;
+    .about-mark::after {
+      inset: 28px;
     }
 
-    .product-copy p {
-      color: var(--muted);
-      margin: 0;
+    .about-mark span {
+      color: var(--green-bright);
+      font-size: clamp(4rem, 9vw, 7rem);
+      font-style: italic;
+      font-weight: 1000;
+      letter-spacing: -0.1em;
+      text-shadow: 0 0 40px rgb(149 214 0 / 45%);
     }
 
-    .benefits {
-      background: var(--surface);
+    .about-copy p {
+      color: var(--gray);
+      margin: 0 0 1rem;
     }
 
-    .benefit-list {
+    .academic-note {
+      border-left: 2px solid var(--green);
+      color: #d1d1d1 !important;
+      margin-top: 1.4rem !important;
+      padding-left: 1rem;
+    }
+
+    .contact-section {
+      background:
+        radial-gradient(ellipse at 90% 15%, rgb(149 214 0 / 10%), transparent 36%),
+        var(--black);
+    }
+
+    .contact-layout {
       display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(2rem, 6vw, 5rem);
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .contact-copy .section-title {
+      margin-bottom: 1rem;
+    }
+
+    .contact-copy > p {
+      color: var(--gray);
+      margin: 0;
+      max-width: 380px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 0.75rem;
       list-style: none;
-      margin: 2rem 0 0;
+      margin: 1.8rem 0 0;
       padding: 0;
     }
 
-    .benefit-list li {
-      border-left: 3px solid var(--neon);
-      background: var(--surface-light);
-      font-weight: 700;
-      padding: 1.25rem;
+    .contact-list li {
+      align-items: center;
+      color: #d9d9d9;
+      display: flex;
+      gap: 0.75rem;
     }
 
-    .contact-section a {
-      color: var(--neon);
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
+    .contact-list svg {
+      color: var(--green-bright);
+      flex: 0 0 19px;
+      height: 19px;
+      width: 19px;
     }
 
-    .contact-details {
-      color: var(--muted);
-      margin-top: 1.5rem;
+    .contact-list a {
+      text-decoration-color: rgb(149 214 0 / 45%);
+      text-underline-offset: 4px;
     }
 
-    .contact-details p {
-      margin: 0.4rem 0;
+    .contact-list a:hover {
+      color: var(--green-bright);
     }
 
-    .site-footer {
-      border-top: 1px solid #343a32;
-      color: var(--muted);
-      font-size: 0.85rem;
-      padding: 1.5rem;
-      text-align: center;
+    .contact-form {
+      background: linear-gradient(145deg, #171a16, #0d0f0d);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      display: grid;
+      gap: 1rem;
+      padding: clamp(1.25rem, 3vw, 2rem);
     }
 
-    .site-footer p {
+    .form-row {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .form-field label {
+      color: #dedede;
+      font-size: 0.77rem;
+      font-weight: 750;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      background: #0a0c0a;
+      border: 1px solid rgb(255 255 255 / 14%);
+      border-radius: 6px;
+      color: var(--white);
+      min-height: 46px;
+      padding: 0.7rem 0.8rem;
+      resize: vertical;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+      width: 100%;
+    }
+
+    .form-field textarea {
+      min-height: 108px;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgb(149 214 0 / 12%);
+      outline: none;
+    }
+
+    .form-note {
+      color: var(--gray);
+      font-size: 0.75rem;
       margin: 0;
     }
 
-    @media (max-width: 760px) {
+    .form-button {
+      justify-self: start;
+    }
+
+    .form-button:disabled {
+      background: #30342d;
+      border-color: #454a41;
+      box-shadow: none;
+      color: #a1a1a1;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .site-footer {
+      background: #080908;
+      border-top: 1px solid var(--line);
+      padding-block: 3rem 1.25rem;
+    }
+
+    .footer-main {
+      align-items: start;
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1.4fr 0.8fr 1fr;
+      padding-bottom: 2.25rem;
+    }
+
+    .footer-brand p {
+      color: var(--gray);
+      font-size: 0.83rem;
+      margin: 1rem 0 0;
+      max-width: 320px;
+    }
+
+    .footer-heading {
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      margin: 0 0 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .footer-links a {
+      color: var(--gray);
+      font-size: 0.83rem;
+      text-decoration: none;
+      transition: color 180ms ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--green-bright);
+    }
+
+    .footer-bottom {
+      align-items: center;
+      border-top: 1px solid var(--line);
+      color: var(--gray);
+      display: flex;
+      font-size: 0.72rem;
+      gap: 1rem;
+      justify-content: space-between;
+      padding-top: 1rem;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+    }
+
+    .footer-bottom strong {
+      color: var(--green);
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .has-reveal .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 650ms var(--ease-out), transform 650ms var(--ease-out);
+    }
+
+    .has-reveal .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes can-float {
+      0%,
+      100% {
+        transform: translateY(0) rotate(5deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(3deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-layout {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+
+      .hero-can {
+        height: 370px;
+        width: 82%;
+      }
+
+      .product-image-wrap {
+        height: 225px;
+      }
+
+      .product-copy {
+        padding: 1rem;
+      }
+
+      .product-card h3 {
+        font-size: 1.05rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      html {
+        scroll-padding-top: 74px;
+      }
+
       .site-header {
+        min-height: 68px;
+        padding-inline: 1.1rem;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .site-nav {
+        align-items: stretch;
+        background: rgb(9 10 9 / 98%);
+        border-bottom: 1px solid var(--green-line);
+        box-shadow: 0 18px 32px rgb(0 0 0 / 40%);
+        display: none;
+        flex-direction: column;
+        gap: 0.3rem;
+        left: 0;
+        padding: 0.75rem 1rem 1rem;
+        position: absolute;
+        right: 0;
+        top: 100%;
+      }
+
+      .site-nav.is-open {
+        display: flex;
+      }
+
+      .site-nav a {
+        border-radius: 6px;
+        padding: 0.75rem 0.8rem;
+      }
+
+      .hero {
+        padding-block: 4rem 1rem;
+      }
+
+      .hero-layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero::before {
+        height: 370px;
+        right: -190px;
+        top: 66%;
+        width: 370px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.4rem, 15vw, 6rem);
+      }
+
+      .hero-visual {
+        min-height: 330px;
+      }
+
+      .hero-can {
+        height: 300px;
+        max-width: 280px;
+        width: 62%;
+      }
+
+      .hero-stamp {
+        bottom: 2rem;
+        right: 13%;
+      }
+
+      .section-heading {
         align-items: flex-start;
         flex-direction: column;
         gap: 1rem;
       }
 
-      .site-nav {
-        flex-wrap: wrap;
-        gap: 0.75rem 1.25rem;
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .hero {
-        min-height: 400px;
-        padding-bottom: 4rem;
-        padding-top: 4rem;
-      }
-
-      .product-grid,
-      .benefit-list {
+      .attitude-grid,
+      .about-layout,
+      .contact-layout {
         grid-template-columns: 1fr;
+      }
+
+      .attitude-collage {
+        min-height: 320px;
+      }
+
+      .collage-photo:first-child {
+        height: 270px;
+      }
+
+      .collage-photo:nth-child(2),
+      .collage-photo:nth-child(3) {
+        height: 160px;
+      }
+
+      .about-mark {
+        max-width: 250px;
+      }
+
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-card {
+        min-height: auto;
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .container {
+        padding-inline: 1.15rem;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image-wrap {
+        height: 280px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-brand {
+        grid-column: auto;
+      }
+
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
 
@@ -282,80 +1243,324 @@
       *,
       *::before,
       *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
         transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
   <header class="site-header">
-    <a class="brand" href="#inicio">MONSTER<span>ENERGY</span></a>
-    <nav class="site-nav" aria-label="Navegación principal">
+    <a class="brand" href="#inicio" aria-label="MonsterEnergyStore, inicio">
+      <span class="brand-mark" aria-hidden="true">M</span>
+      <span class="brand-name">MONSTER<span>ENERGY STORE</span></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Abrir menú">
+      <span class="menu-icon" aria-hidden="true"></span>
+    </button>
+    <nav class="site-nav" id="primary-navigation" aria-label="Navegación principal">
       <a href="#inicio">Inicio</a>
       <a href="#productos">Productos</a>
-      <a href="#beneficios">Beneficios</a>
+      <a href="#nosotros">Nosotros</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
-  <main>
-    <section class="hero" id="inicio">
-      <div class="hero-content">
-        <p class="eyebrow">Monster Energy Store</p>
-        <h1>UNLEASH <span>THE BEAST</span></h1>
-        <p>Somos una tienda ficticia especializada en bebidas Monster Energy, con una colección de sabores para quienes buscan energía y una experiencia intensa. ¡Conoce nuestros productos y encuentra tu próxima bebida favorita!</p>
-        <a class="button" href="#productos">EXPLORAR PRODUCTOS</a>
+
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">MonsterEnergyStore · colección</p>
+          <h1 id="hero-title">UNLEASH <span>THE BEAST.</span></h1>
+          <p class="hero-description">Descubre una colección de sabores diseñada para quienes buscan algo diferente.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#productos">EXPLORAR PRODUCTOS <span class="button-arrow" aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="#nosotros">CONOCE NUESTRA HISTORIA</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Monster Original, bebida destacada">
+          <span class="hero-glow" aria-hidden="true"></span>
+          <img
+            class="hero-can"
+            src="https://i5-mx.walmartimages.com/asr/83012b96-40e5-4f70-a4a4-9d4f38bdd093.53144389acd57d036aa703b2d05f964b.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF"
+            alt="Lata real de Monster Energy Original de 473 ml"
+            fetchpriority="high">
+          <span class="hero-stamp" aria-hidden="true">ENERGY<br>COLLECTION</span>
+        </div>
       </div>
     </section>
 
-    <section class="content-section" id="productos">
-      <h2>Nuestra colección</h2>
-      <p class="section-intro">Descubre una selección de sabores para diferentes gustos y momentos.</p>
-      <div class="product-grid">
-        <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Imagen ilustrativa de una bebida refrescante">
-          <div class="product-copy">
-            <h3>Monster Original</h3>
-            <p>El sabor clásico de Monster, ideal para quienes buscan una bebida energética intensa.</p>
+    <section class="section products-section" id="productos" aria-labelledby="products-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-heading-copy">
+            <p class="section-kicker">Encuentra tu sabor</p>
+            <h2 class="section-title" id="products-title">Nuestra colección</h2>
+            <p class="section-intro">Desde el sabor clásico hasta mezclas frutales: explora algunas de las variedades Monster Energy.</p>
           </div>
-        </article>
-        <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Imagen ilustrativa de una bebida con frutas">
-          <div class="product-copy">
-            <h3>Monster Ultra</h3>
-            <p>Una opción ligera y refrescante para descubrir sabores de la línea Ultra.</p>
-          </div>
-        </article>
-        <article class="product-card">
-          <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Imagen ilustrativa de una bebida de mango">
-          <div class="product-copy">
-            <h3>Monster Mango Loco</h3>
-            <p>Una bebida de sabor frutal con mango, perfecta para quienes prefieren una experiencia tropical.</p>
-          </div>
-        </article>
+        </div>
+        <div class="product-grid">
+          <article class="product-card reveal">
+            <div class="product-image-wrap">
+              <img class="product-image" src="https://i5-mx.walmartimages.com/asr/83012b96-40e5-4f70-a4a4-9d4f38bdd093.53144389acd57d036aa703b2d05f964b.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF" alt="Lata verde de Monster Energy Original, 473 ml" loading="lazy" decoding="async">
+            </div>
+            <div class="product-copy">
+              <p class="product-category">Original · clásico</p>
+              <h3>Monster Original</h3>
+              <p class="product-description">El sabor original de Monster con su perfil intenso y reconocible.</p>
+              <a class="product-link" href="https://www.walmart.com.mx/ip/bebida-energetica-monster-energy-green-473-ml/00007084703591" target="_blank" rel="noopener noreferrer">VER PRODUCTO</a>
+            </div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image-wrap">
+              <img class="product-image" src="https://i5-mx.walmartimages.com/asr/e9f6bfde-bcd9-49a4-b2f5-c7addef83503.5ec32abc065c19a3d8675a29ab469756.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF" alt="Lata blanca Monster Zero Ultra, 473 ml" loading="lazy" decoding="async">
+            </div>
+            <div class="product-copy">
+              <p class="product-category">Ultra · sin azúcar</p>
+              <h3>Monster Ultra</h3>
+              <p class="product-description">Una alternativa ligera y refrescante de la línea Ultra.</p>
+              <a class="product-link" href="https://www.walmart.com.mx/ip/bebida-energetica-monster-zero-ultra-473-ml/00007084703604" target="_blank" rel="noopener noreferrer">VER PRODUCTO</a>
+            </div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image-wrap">
+              <img class="product-image" src="https://i5-mx.walmartimages.com/asr/3cc7350b-19a5-45bd-b514-4ec43ae9880d.5c1a0304a68b8caa70832be3a2b0c43c.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF" alt="Lata ilustrada de Monster Mango Loco, 473 ml" loading="lazy" decoding="async">
+            </div>
+            <div class="product-copy">
+              <p class="product-category">Juice Monster · mango</p>
+              <h3>Monster Mango Loco</h3>
+              <p class="product-description">Una mezcla frutal con sabor a mango y un carácter tropical.</p>
+              <a class="product-link" href="https://www.walmart.com.mx/ip/bebida-energetica-monster-mango-loco-de-473-ml/00007084703627" target="_blank" rel="noopener noreferrer">VER PRODUCTO</a>
+            </div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image-wrap">
+              <img class="product-image" src="https://i5.walmartimages.com/seo/Monster-Energy-Juice-Pipeline-Punch-Juice-Energy-Drink-16-Fl-Oz_7c90329e-65ab-4dca-97f3-fa74cd2d87f1.840619d7a57208a12e667867504d8a16.jpeg?odnHeight=576&amp;odnWidth=576&amp;odnBg=FFFFFF" alt="Lata rosa de Monster Pipeline Punch, bebida Juice Monster" loading="lazy" decoding="async">
+            </div>
+            <div class="product-copy">
+              <p class="product-category">Juice Monster · frutal</p>
+              <h3>Monster Pipeline Punch</h3>
+              <p class="product-description">Una bebida frutal de la colección Juice Monster.</p>
+              <a class="product-link" href="https://www.walmart.com/ip/Monster-Energy-Juice-Pipeline-Punch-Juice-Energy-Drink-16-Fl-Oz/51871250" target="_blank" rel="noopener noreferrer">VER PRODUCTO</a>
+            </div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image-wrap">
+              <img class="product-image" src="https://i5.walmartimages.com/seo/Monster-Zero-Sugar-Ultra-Paradise-Energy-Drink-Can_7b21aa08-3f65-4849-9dbf-65c598705e5f.eef3e21a7b627f729bfd5533a21011cb.jpeg?odnHeight=576&amp;odnWidth=576&amp;odnBg=FFFFFF" alt="Lata verde de Monster Ultra Paradise sin azúcar" loading="lazy" decoding="async">
+            </div>
+            <div class="product-copy">
+              <p class="product-category">Ultra · sin azúcar</p>
+              <h3>Monster Ultra Paradise</h3>
+              <p class="product-description">Una variante Ultra de sabor refrescante y perfil tropical.</p>
+              <a class="product-link" href="https://www.walmart.com/ip/Monster-Zero-Sugar-Ultra-Paradise-Energy-Drink-Can/12866014429" target="_blank" rel="noopener noreferrer">VER PRODUCTO</a>
+            </div>
+          </article>
+          <article class="product-card reveal">
+            <div class="product-image-wrap">
+              <img class="product-image" src="https://i.ebayimg.com/images/g/o~UAAOSweQNkNzub/s-l1600.jpg" alt="Lata azul de la edición Monster Energy Lewis Hamilton Zero Sugar" loading="lazy" decoding="async">
+            </div>
+            <div class="product-copy">
+              <p class="product-category">Edición Lewis Hamilton</p>
+              <h3>Monster Lewis Hamilton</h3>
+              <p class="product-description">Una edición especial de la colección asociada al piloto Lewis Hamilton.</p>
+              <a class="product-link" href="https://www.monsterenergy.com/en-ie/energy-drinks/monster-energy/lewis-hamilton-zero-sugar/" target="_blank" rel="noopener noreferrer">VER PRODUCTO</a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="content-section benefits" id="beneficios">
-      <h2>¿Por qué elegirnos?</h2>
-      <ul class="benefit-list">
-        <li>Variedad de sabores.</li>
-        <li>Diferentes presentaciones.</li>
-        <li>Información de productos en un solo lugar.</li>
-      </ul>
+    <section class="section attitude-section" aria-labelledby="attitude-title">
+      <div class="container attitude-grid">
+        <div class="attitude-copy reveal">
+          <p class="section-kicker">Más que energía</p>
+          <blockquote id="attitude-title">NO ES SOLO UNA BEBIDA.<span>ES UNA ACTITUD.</span></blockquote>
+          <p>Sabores con personalidad, diseños que destacan y opciones para descubrir a tu propio ritmo.</p>
+        </div>
+        <div class="attitude-collage reveal" aria-label="Selección de productos Monster Energy">
+          <img class="collage-photo" src="https://i5-mx.walmartimages.com/asr/83012b96-40e5-4f70-a4a4-9d4f38bdd093.53144389acd57d036aa703b2d05f964b.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF" alt="Monster Energy Original" loading="lazy" decoding="async">
+          <img class="collage-photo" src="https://i5-mx.walmartimages.com/asr/3cc7350b-19a5-45bd-b514-4ec43ae9880d.5c1a0304a68b8caa70832be3a2b0c43c.jpeg?odnHeight=640&amp;odnWidth=640&amp;odnBg=FFFFFF" alt="Monster Mango Loco" loading="lazy" decoding="async">
+          <img class="collage-photo" src="https://i5.walmartimages.com/seo/Monster-Energy-Juice-Pipeline-Punch-Juice-Energy-Drink-16-Fl-Oz_7c90329e-65ab-4dca-97f3-fa74cd2d87f1.840619d7a57208a12e667867504d8a16.jpeg?odnHeight=576&amp;odnWidth=576&amp;odnBg=FFFFFF" alt="Monster Pipeline Punch" loading="lazy" decoding="async">
+        </div>
+      </div>
     </section>
 
-    <section class="content-section contact-section" id="contacto">
-      <h2>Contacto</h2>
-      <p class="section-intro">¿Tienes alguna pregunta? Estamos aquí para ayudarte.</p>
-      <div class="contact-details">
-        <p><a href="mailto:contacto@monsterstore.com">contacto@monsterstore.com</a></p>
-        <p><a href="tel:+526181234567">618 123 4567</a></p>
-        <p>Durango, México.</p>
+    <section class="section benefits-section" aria-labelledby="benefits-title">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-heading-copy">
+            <p class="section-kicker">Una experiencia simple</p>
+            <h2 class="section-title" id="benefits-title">Todo lo que buscas, en un solo lugar.</h2>
+            <p class="section-intro">Explora la colección con información directa y organizada.</p>
+          </div>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit-card reveal">
+            <span class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 14.7 8.5 21 9.4l-4.5 4.4 1.1 6.2L12 17l-5.6 3 1.1-6.2L3 9.4l6.3-.9L12 3Z"/>
+              </svg>
+            </span>
+            <h3>Variedad de sabores</h3>
+            <p>Compara opciones clásicas, Ultra y frutales.</p>
+          </article>
+          <article class="benefit-card reveal">
+            <span class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3h10l1 18H6L7 3Z"/>
+                <path d="M9 7h6M9 11h6"/>
+              </svg>
+            </span>
+            <h3>Diferentes presentaciones</h3>
+            <p>Encuentra información de formatos y productos destacados.</p>
+          </article>
+          <article class="benefit-card reveal">
+            <span class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 5h16v14H4z"/>
+                <path d="M8 9h8M8 13h8M8 17h4"/>
+              </svg>
+            </span>
+            <h3>Información de productos</h3>
+            <p>Características y descripciones organizadas en un solo lugar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="nosotros" aria-labelledby="about-title">
+      <div class="container about-layout">
+        <div class="about-mark reveal" aria-hidden="true"><span>M</span></div>
+        <div class="about-copy reveal">
+          <p class="section-kicker">Sobre el proyecto</p>
+          <h2 class="section-title" id="about-title">Conoce MonsterEnergyStore</h2>
+          <p>Somos una tienda ficticia especializada en bebidas Monster Energy. MonsterEnergyStore es un proyecto académico de página promocional dedicado a mostrar diferentes productos y algunas de sus características.</p>
+          <p>La propuesta busca que la colección sea fácil de explorar, con descripciones breves e información reunida en un solo lugar.</p>
+          <p class="academic-note">Proyecto académico independiente. No somos una tienda oficial de Monster Energy ni tenemos afiliación con la marca.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contacto" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div class="contact-copy reveal">
+          <p class="section-kicker">Estamos para ayudarte</p>
+          <h2 class="section-title" id="contact-title">Hablemos.</h2>
+          <p>¿Tienes dudas sobre la información del sitio? Escríbenos o consulta nuestros datos de contacto.</p>
+          <ul class="contact-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              <a href="mailto:contacto@monsterstore.com">contacto@monsterstore.com</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h3l2 5-2 2a15 15 0 0 0 4 4l2-2 5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 5 5a2 2 0 0 1 2-2Z"/></svg>
+              <a href="tel:+526181234567">618 123 4567</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span>Durango, México.</span>
+            </li>
+          </ul>
+        </div>
+        <form class="contact-form reveal" aria-describedby="form-note">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="contact-name">Nombre</label>
+              <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre">
+            </div>
+            <div class="form-field">
+              <label for="contact-email">Correo electrónico</label>
+              <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com">
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="contact-message">Mensaje</label>
+            <textarea id="contact-message" name="message" placeholder="¿En qué podemos ayudarte?"></textarea>
+          </div>
+          <p class="form-note" id="form-note">Formulario demostrativo: no envía ni almacena mensajes.</p>
+          <button class="button form-button" type="button" disabled>ENVÍO NO DISPONIBLE</button>
+        </form>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
-    <p>© 2026 MonsterEnergyStore. Proyecto académico. Todos los derechos reservados.</p>
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="brand" href="#inicio" aria-label="MonsterEnergyStore, inicio">
+            <span class="brand-mark" aria-hidden="true">M</span>
+            <span class="brand-name">MONSTER<span>ENERGY STORE</span></span>
+          </a>
+          <p>Una página promocional académica para explorar una colección de bebidas Monster Energy.</p>
+        </div>
+        <div>
+          <h2 class="footer-heading">Explorar</h2>
+          <nav class="footer-links" aria-label="Navegación del pie de página">
+            <a href="#inicio">Inicio</a>
+            <a href="#productos">Productos</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+        </div>
+        <div>
+          <h2 class="footer-heading">Contacto</h2>
+          <div class="footer-links">
+            <a href="mailto:contacto@monsterstore.com">contacto@monsterstore.com</a>
+            <a href="tel:+526181234567">618 123 4567</a>
+            <span>Durango, México.</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 <strong>MonsterEnergyStore</strong>. Todos los derechos reservados.</p>
+        <p>Proyecto académico independiente; no oficial ni afiliado con Monster Energy.</p>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const primaryNavigation = document.querySelector("#primary-navigation");
+
+    function setMenuOpen(isOpen) {
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+      primaryNavigation.classList.toggle("is-open", isOpen);
+    }
+
+    menuToggle.addEventListener("click", () => {
+      setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    primaryNavigation.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuToggle.focus();
+      }
+    });
+
+    const revealElements = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      document.documentElement.classList.add("has-reveal");
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealElements.forEach((element) => revealObserver.observe(element));
+    }
+  </script>
 </body>
 </html>
