@@ -1,0 +1,11 @@
+Nombre del proyecto:
+MonsterEnergyStore
+
+Problema que busca atender:
+La falta de un espacio web sencillo y organizado para presentar una tienda ficticia especializada en bebidas Monster Energy y dar a conocer su propuesta a posibles clientes.
+
+Objetivo general:
+Crear una página web promocional que presente la tienda y su oferta de bebidas de forma clara y accesible.
+
+Descripción del proyecto:
+MonsterEnergyStore es un proyecto académico de una tienda ficticia especializada en bebidas Monster Energy. La página web servirá para presentar la tienda y, en etapas posteriores, podrá desarrollarse como un espacio promocional. Esta primera versión contiene únicamente una estructura HTML inicial.
